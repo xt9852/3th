@@ -326,7 +326,10 @@ CU_pSuite CU_add_suite_with_setup_and_teardown(const char *strName,
 /**<
  *  The same as CU_add_suite but also adds setup and tear down callbacks for
  *  each test in this suite.
- *
+ 
+ *  @param strName Name for the new test suite (non-NULL).
+ *  @param pInit   Initialization function to call before running suite.
+ *  @param pClean  Cleanup function to call after running suite.
  *  @param pSetup  SetUp function to call before running each test.
  *  @param pTear   TearDown function to call after running each test.
  */
@@ -506,9 +509,9 @@ CU_pTest CU_add_test(CU_pSuite pSuite, const char* strName, CU_TestFunc pTestFun
  *  - CUE_DUP_TEST if a test having strName is already registered to pSuite.
  *  - CUE_NOMEMORY if a memory allocation failed.<br /><br />
  *
- *  @param pSuite  Test suite to which to add new test (non-NULL).
- *  @param strName Name for the new test case (non-NULL).
- *  @param pTest   Function to call when running the test (non-NULL).
+ *  @param pSuite       Test suite to which to add new test (non-NULL).
+ *  @param strName      Name for the new test case (non-NULL).
+ *  @param pTestFunc    Function to call when running the test (non-NULL).
  *  @return A pointer to the newly-created test (NULL if creation failed)
  */
 
@@ -922,7 +925,7 @@ CU_pTest CU_get_test_by_index(unsigned int index, CU_pSuite pSuite);
  *  automatically searches the active test registry.
  *
  *  @param index     The 1-based index of the test to find.
- *  @param pRegistry The registry to scan (non-NULL).
+ *  @param pSuite    The registry to scan (non-NULL).
  *  @return Pointer to the test at the specified index, or
  *          NULL if index is invalid.
  *  @see CU_get_test_at_pos()
